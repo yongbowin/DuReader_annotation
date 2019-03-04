@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f46de4b3-d199-4ea0-9739-0d29b1902c73" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/paddle/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/paddle/dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paddle/paragraph_extraction.py" beforeDir="false" afterPath="$PROJECT_DIR$/paddle/paragraph_extraction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paddle/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/paddle/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paddle/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/paddle/run.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paddle/vocab.py" beforeDir="false" afterPath="$PROJECT_DIR$/paddle/vocab.py" afterDir="false" />
-    </list>
+    <list default="true" id="f46de4b3-d199-4ea0-9739-0d29b1902c73" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,8 +58,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/paddle/run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="325" column="27" lean-forward="true" selection-start-line="325" selection-start-column="27" selection-end-line="325" selection-end-column="27" />
+            <state relative-caret-position="235">
+              <caret line="318" column="25" lean-forward="true" selection-start-line="318" selection-start-column="25" selection-end-line="318" selection-end-column="25" />
               <folding>
                 <element signature="e#612#650#0" expanded="true" />
               </folding>
@@ -546,8 +540,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/paddle/run.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="325" column="27" lean-forward="true" selection-start-line="325" selection-start-column="27" selection-end-line="325" selection-end-column="27" />
+        <state relative-caret-position="235">
+          <caret line="318" column="25" lean-forward="true" selection-start-line="318" selection-start-column="25" selection-end-line="318" selection-end-column="25" />
           <folding>
             <element signature="e#612#650#0" expanded="true" />
           </folding>

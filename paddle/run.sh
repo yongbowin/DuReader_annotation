@@ -33,6 +33,7 @@ paragraph_extraction ()
 }
 
 
+# $1 is the first param
 PROCESS_NAME="$1"
 case $PROCESS_NAME in
     --para_extraction)
@@ -45,8 +46,10 @@ case $PROCESS_NAME in
     ;;
     --prepare|--train|--evaluate|--predict)
         # Start Paddle baseline
+        # $@ represent all params, $# is the number of all params
         python run.py $@
     ;;
     *)
+        # $0 is the script itself name
         echo $"Usage: $0 {--para_extraction|--prepare|--train|--evaluate|--predict}"
 esac

@@ -1,0 +1,28 @@
+1.Paragraph Extraction
+
+```
+sh run.sh --para_extraction
+```
+
+2.Vocabulary Preparation
+
+```
+sh run.sh --prepare --trainset ../data/extracted/trainset/zhidao.train.json ../data/extracted/trainset/search.train.json --devset ../data/extracted/devset/zhidao.dev.json ../data/extracted/devset/search.dev.json --testset ../data/extracted/testset/zhidao.test.json ../data/extracted/testset/search.test.json
+```
+
+3.Training
+
+data pre-processing:
+- (training) Remove the sample which length is 0 or larger than passage
+- (training) For a question, to chose the most related paragraph from single document, then apply to all documents, and then append them to a list respectively
+- (no training) Count common tokens between each paragraph and question, then calculate rate in question.
+- create vocabulary using all words in training data.
+- filter frequency less min_cnt=2 word.
+- reset token-->id map.
+- randomly initializes the embeddings for each token.
+
+Arch
+   - prepare
+      - create directory
+      - vocabulary
+      - embedding

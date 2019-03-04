@@ -41,6 +41,9 @@ class Vocab(object):
 
         self.initial_tokens = initial_tokens if initial_tokens is not None else []
         self.initial_tokens.extend([self.pad_token, self.unk_token, self.split_token])
+        """
+        To create the vocabulary that contain all words and its idx of all questions and documents (chosen paragraph). 
+        """
         for token in self.initial_tokens:
             self.add(token)
 
@@ -137,7 +140,10 @@ class Vocab(object):
             embed_dim: the size of the embedding for each token
         """
         self.embed_dim = embed_dim
-        self.embeddings = np.random.rand(self.size(), embed_dim)
+        self.embeddings = np.random.rand(self.size(), embed_dim)  # the scope is [0, 1)
+        """
+        if token in ['<blank>', '<unk>', '<splitter>'], init its embedding to zeros([self.embed_dim])
+        """
         for token in [self.pad_token, self.unk_token, self.split_token]:
             self.embeddings[self.get_id(token)] = np.zeros([self.embed_dim])
 

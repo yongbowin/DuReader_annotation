@@ -108,6 +108,9 @@ def paragraph_selection(sample, mode):
     for d_idx, doc in enumerate(sample['documents']):
         if 'segmented_paragraphs_scores' not in doc:
             continue
+        """
+        To remove the duplicated paragraphs of documents
+        """
         status = dup_remove(doc)
         segmented_title = doc["segmented_title"]
         title_len = len(segmented_title)
@@ -116,8 +119,11 @@ def paragraph_selection(sample, mode):
             para_id = sample['documents'][doc_id]['most_related_para']
         total_len = title_len + sum(doc['paragraphs_length'])
         # add splitter
-        para_num = len(doc["segmented_paragraphs"])
+        para_num = len(doc["segmented_paragraphs"])  # the nums of all paragraphs in document
         total_len += para_num
+        """
+        total_len = len(segmented_title) + sum(doc['paragraphs_length']) + len(doc["segmented_paragraphs"])
+        """
         if total_len <= MAX_P_LEN:
             incre_len = title_len
             total_segmented_content = copy.deepcopy(segmented_title)

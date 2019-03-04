@@ -71,21 +71,49 @@ class BRCDataset(object):
         with io.open(data_path, 'r', encoding='utf-8') as fin:
             data_set = []
             for lidx, line in enumerate(fin):
+                """
+                a sample --> a question
+                """
                 sample = json.loads(line.strip())
                 if train:
+                    """
+                    remove the sample which length is 0 or larger than passage.
+                    """
                     if len(sample['answer_spans']) == 0:
                         continue
                     if sample['answer_spans'][0][1] >= self.max_p_len:
                         continue
 
-                if 'answer_docs' in sample:
+                if 'answer_docs' in sample:  # change name
                     sample['answer_passages'] = sample['answer_docs']
 
                 sample['question_tokens'] = sample['segmented_question']
 
                 sample['passages'] = []
                 for d_idx, doc in enumerate(sample['documents']):
+                    """
+                    To chose the most related paragraph from each document, and then append it to a list.
+                    """
                     if train:
+                        """
+                        question ==> documents
+                                        - document1
+                                            - paragraph
+                                            - paragraph
+                                            - ......
+                                            - paragraph
+                                        - document2
+                                            - ......
+                                        - document3
+                                            - ......
+                                        - document4
+                                            - ......
+                                        - document5
+                                            - ......
+                        
+                        For each question, there are 1 documents with 5 single document, each document/passage has many paragraphs, 
+                        so there should be a most related paragraph "most_related_para".
+                        """
                         most_related_para = doc['most_related_para']
                         sample['passages'].append({
                             'passage_tokens':
@@ -95,6 +123,31 @@ class BRCDataset(object):
                     else:
                         para_infos = []
                         for para_tokens in doc['segmented_paragraphs']:
+                            """
+                            count common tokens between each paragraph and question, then calculate rate in question. 
+                            
+                            Examples:
+                                >>> from collections import Counter
+                                >>> 
+                                >>> a = ["百度", "经验", ":", "jingyan", ".", "baidu", ".", "com"]
+                                >>> b = ["百度", "经验", ":", "jingyan123"]                       
+                                >>> c = ["百度", "经验", ":", "jingyan", "jingyan", "jingyan"]
+                                >>> c1 = ["百度", "经验", ":", "jingyan", "jingyan", "jingyan", "jingyan"]
+                                >>> 
+                                >>> comm_w = Counter(a) & Counter(b)
+                                >>> comm_w
+                                Counter({'百度': 1, '经验': 1, ':': 1})
+                                >>> 
+                                >>> Counter(c)
+                                Counter({'jingyan': 3, '百度': 1, '经验': 1, ':': 1})
+                                >>> 
+                                >>> Counter(c1)
+                                Counter({'jingyan': 4, '百度': 1, '经验': 1, ':': 1})
+                                >>> 
+                                >>> comm_p = Counter(c) & Counter(c1)
+                                >>> comm_p
+                                Counter({'jingyan': 3, '百度': 1, '经验': 1, ':': 1})
+                            """
                             question_tokens = sample['segmented_question']
                             common_with_question = Counter(
                                 para_tokens) & Counter(question_tokens)
@@ -106,6 +159,9 @@ class BRCDataset(object):
                                     correct_preds) / len(question_tokens)
                             para_infos.append((para_tokens, recall_wrt_question,
                                                len(para_tokens)))
+                        """
+                        sort by 'recall_wrt_question' (default low-->high) from high-->low , and then sout by 'len(para_tokens)'
+                        """
                         para_infos.sort(key=lambda x: (-x[1], x[2]))
                         fake_passage_tokens = []
                         for para_info in para_infos[:1]:

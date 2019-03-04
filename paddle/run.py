@@ -592,11 +592,27 @@ def prepare(logger, args):
         assert os.path.exists(data_path), '{} file does not exist.'.format(
             data_path)
     logger.info('Preparing the directories...')
+    """
+    args.vocab_dir:
+        ../data/vocab, help="vocabulary".
+    
+    args.save_dir:
+        ../data/models, help="Specify the path to save trained models".
+    
+    args.result_dir:
+        ../data/results/, help="the dir to output the results".
+    
+    """
     for dir_path in [args.vocab_dir, args.save_dir, args.result_dir]:
         if not os.path.exists(dir_path):
             os.makedirs(dir_path)
 
     logger.info('Building vocabulary...')
+    """
+    max_p_num=5
+    max_p_len=500
+    max_q_len=60
+    """
     brc_data = BRCDataset(args.max_p_num, args.max_p_len, args.max_q_len,
                           args.trainset, args.devset, args.testset)
     vocab = Vocab(lower=True)
@@ -610,7 +626,7 @@ def prepare(logger, args):
         filtered_num, vocab.size()))
 
     logger.info('Assigning embeddings...')
-    vocab.randomly_init_embeddings(args.embed_size)
+    vocab.randomly_init_embeddings(args.embed_size)  # embed_size (default) = 300
 
     logger.info('Saving vocab...')
     with open(os.path.join(args.vocab_dir, 'vocab.data'), 'wb') as fout:
@@ -622,7 +638,7 @@ def prepare(logger, args):
 if __name__ == '__main__':
     args = parse_args()
 
-    if args.enable_ce:
+    if args.enable_ce:  # to ensure reproduce
         random.seed(args.random_seed)
         np.random.seed(args.random_seed)
 

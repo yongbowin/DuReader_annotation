@@ -1,4 +1,5 @@
 #!/bin/bash
+# specific gpu devices
 export CUDA_VISIBLE_DEVICES=0
 
 paragraph_extraction ()

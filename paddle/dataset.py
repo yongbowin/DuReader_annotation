@@ -265,8 +265,20 @@ class BRCDataset(object):
             if data_set is None:
                 continue
             for sample in data_set:
+                """
+                convert token of question to id based on vocabulary.
+                
+                one sample has one question.
+                """
                 sample['question_token_ids'] = vocab.convert_to_ids(sample[
-                    'question_tokens'])
+                    'question_tokens'])  # list
+
+                """
+                sample['passages'].append({
+                            'passage_tokens': doc['segmented_paragraphs'][most_related_para],
+                            'is_selected': doc['is_selected']
+                        })
+                """
                 for passage in sample['passages']:
                     passage['passage_token_ids'] = vocab.convert_to_ids(passage[
                         'passage_tokens'])

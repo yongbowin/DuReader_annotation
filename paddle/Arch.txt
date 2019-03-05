@@ -36,3 +36,16 @@ Arch
       - create directory
       - vocabulary
       - embedding
+
+Modify:
+-----------------------------------------------
+1.When to predict, select top 3 document
+
+
+
+
+
+
+
+
+

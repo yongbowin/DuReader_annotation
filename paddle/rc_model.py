@@ -281,13 +281,19 @@ def rc_model(hidden_size, vocab, args):
         name="end_lables", shape=[1], dtype='float32', lod_level=1)
 
     # stage 1:setup input data, embedding table & encode
+    """
+    def get_data(input_name, lod_level, args):
+        input_ids = layers.data(
+            name=input_name, shape=[1], dtype='int64', lod_level=lod_level)
+        return input_ids
+    """
     q_id0 = get_data('q_id0', 1, args)
 
     q_ids = get_data('q_ids', 2, args)
     p_ids_name = 'p_ids'
 
     p_ids = get_data('p_ids', 2, args)
-    p_embs = embedding(p_ids, emb_shape, args)
+    p_embs = embedding(p_ids, emb_shape, args)  # emb_shape = [vocab.size(), vocab.embed_dim]
     q_embs = embedding(q_ids, emb_shape, args)
     drnn = layers.DynamicRNN()
     with drnn.block():

@@ -47,6 +47,9 @@ def parse_args():
                         help="The sequence number of a mini-batch data. (default: %(default)d)")
     parser.add_argument("--pass_num", type=int, default=5,
                         help="The number epochs to train. (default: %(default)d)")
+    """
+    if "--use_gpu" value in ('y', 'yes', 't', 'true', 'on', '1'), to use gpu.
+    """
     parser.add_argument("--use_gpu", type=distutils.util.strtobool, default=True,
                         help="Whether to use gpu. (default: %(default)d)")
     parser.add_argument("--log_interval", type=int, default=50,

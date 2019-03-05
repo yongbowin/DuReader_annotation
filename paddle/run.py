@@ -332,17 +332,26 @@ def l2_loss(train_prog):
 def train(logger, args):
     """train a model"""
     logger.info('Load data_set and vocab...')
+    """
+    vocab:
+        contain embedding vector.
+    """
     with open(os.path.join(args.vocab_dir, 'vocab.data'), 'rb') as fin:
-        if six.PY2:
+        if six.PY2:  # a boolean indicating if the code running on python2
             vocab = pickle.load(fin)
         else:
             vocab = pickle.load(fin, encoding='bytes')
         logger.info('vocab size is {} and embed dim is {}'.format(vocab.size(
         ), vocab.embed_dim))
+    """
+    max_p_num=5
+    max_p_len=500
+    max_q_len=60
+    """
     brc_data = BRCDataset(args.max_p_num, args.max_p_len, args.max_q_len,
                           args.trainset, args.devset)
     logger.info('Converting text into ids...')
-    brc_data.convert_to_ids(vocab)
+    brc_data.convert_to_ids(vocab)  # convert vocab tokens to ids
     logger.info('Initialize the model...')
 
     if not args.use_gpu:
@@ -355,11 +364,17 @@ def train(logger, args):
     # build model
     main_program = fluid.Program()
     startup_prog = fluid.Program()
-    if args.enable_ce:
+    if args.enable_ce:  # If set, run the task with continuous evaluation logs. default="store_true"
         main_program.random_seed = args.random_seed
         startup_prog.random_seed = args.random_seed
     with fluid.program_guard(main_program, startup_prog):
         with fluid.unique_name.guard():
+            """
+            rc_model():
+                This function build the whole BiDAF network
+            
+            hidden_size=150
+            """
             avg_cost, s_probs, e_probs, match, feed_order = rc_model.rc_model(
                 args.hidden_size, vocab, args)
             # clone from default main program and use it as the validation program
@@ -388,7 +403,7 @@ def train(logger, args):
             # initialize parameters
             place = core.CUDAPlace(0) if args.use_gpu else core.CPUPlace()
             exe = Executor(place)
-            if args.load_dir:
+            if args.load_dir:  # Specify the path to load trained models.
                 logger.info('load from {}'.format(args.load_dir))
                 fluid.io.load_persistables(
                     exe, args.load_dir, main_program=main_program)
@@ -546,6 +561,11 @@ def predict(logger, args):
         vocab = pickle.load(fin)
         logger.info('vocab size is {} and embed dim is {}'.format(vocab.size(
         ), vocab.embed_dim))
+    """
+    max_p_num=5
+    max_p_len=500
+    max_q_len=60
+    """
     brc_data = BRCDataset(
         args.max_p_num, args.max_p_len, args.max_q_len, dev_files=args.testset)
     logger.info('Converting text into ids...')

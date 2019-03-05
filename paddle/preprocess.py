@@ -42,11 +42,18 @@ def precision_recall_f1(prediction, ground_truth):
     else:
         prediction_tokens = prediction
     if not isinstance(ground_truth, list):
+        """
+        such as:
+        ground_truth_tokens:  ['微信']
+        common:  Counter({'微信': 1})
+        ground_truth_tokens:  ['分享']
+        common:  Counter()
+        """
         ground_truth_tokens = ground_truth.split()
     else:
         ground_truth_tokens = ground_truth
     common = Counter(prediction_tokens) & Counter(ground_truth_tokens)
-    num_same = sum(common.values())
+    num_same = sum(common.values())  # calculate common words between question and paragraph
     if num_same == 0:
         return 0, 0, 0
     p = 1.0 * num_same / len(prediction_tokens)
@@ -85,6 +92,10 @@ def f1_score(prediction, ground_truth):
 
 def metric_max_over_ground_truths(metric_fn, prediction, ground_truths):
     """
+    params: (f1_score, para_tokens, question)
+    """
+
+    """
     This function calculates and returns the precision, recall and f1-score
     Args:
         metric_fn: metric function pointer which calculates scores according to corresponding logic.
@@ -96,8 +107,9 @@ def metric_max_over_ground_truths(metric_fn, prediction, ground_truths):
         None
     """
     scores_for_ground_truths = []
-    for ground_truth in ground_truths:
-        score = metric_fn(prediction, ground_truth)
+    for ground_truth in ground_truths:  # i.e., for a single question token in question_tokens_list
+        # for each token in question tokens list, to calculate f1 with para_kokens (para list)
+        score = metric_fn(prediction, ground_truth)  # f1_score()
         scores_for_ground_truths.append(score)
     return max(scores_for_ground_truths)
 

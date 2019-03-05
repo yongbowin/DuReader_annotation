@@ -161,6 +161,10 @@ class Vocab(object):
                 token = contents[0].decode('utf8')
                 if token not in self.token2id:
                     continue
+                """
+                map(float, [...]):
+                    to calculate float([...])
+                """
                 trained_embeddings[token] = list(map(float, contents[1:]))
                 if self.embed_dim is None:
                     self.embed_dim = len(contents) - 1

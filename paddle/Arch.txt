@@ -4,6 +4,17 @@
 sh run.sh --para_extraction
 ```
 
+select paragraph
+- For each paragraph, compute the f1 score compared with the question
+
+
+- predefined maximum length of paragraph (MAX_P_LEN=500)
+- predefined splitter (splitter = u'<splitter>')
+- topN of related paragraph to choose (topN = 3)
+
+-
+
+
 2.Vocabulary Preparation
 
 ```

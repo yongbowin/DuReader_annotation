@@ -225,9 +225,10 @@ if __name__ == "__main__":
         try:
             sample = json.loads(line, encoding='utf8')
         except:
-            print >>sys.stderr, "Invalid input json format - '{}' will be ignored".format(line)
+            print(sys.stderr, "Invalid input json format - '{}' will be ignored".format(line))
             continue
         compute_paragraph_score(sample)
         paragraph_selection(sample, mode)
-        print(json.dumps(sample, encoding='utf8', ensure_ascii=False))
+        # print(json.dumps(sample, encoding='utf8', ensure_ascii=False))  # for python2
+        print(json.dumps(sample, ensure_ascii=False))  # for python3
 

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f46de4b3-d199-4ea0-9739-0d29b1902c73" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/paddle/Arch.txt" beforeDir="false" afterPath="$PROJECT_DIR$/paddle/Arch.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paddle/paragraph_extraction.py" beforeDir="false" afterPath="$PROJECT_DIR$/paddle/paragraph_extraction.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,7 +41,7 @@
         <counts>
           <entry key="csv" value="6" />
           <entry key="dummy" value="9" />
-          <entry key="py" value="4521" />
+          <entry key="py" value="4558" />
           <entry key="sh" value="118" />
           <entry key="txt" value="919" />
         </counts>
@@ -51,7 +50,7 @@
         <counts>
           <entry key="Bash" value="118" />
           <entry key="PLAIN_TEXT" value="934" />
-          <entry key="Python" value="4521" />
+          <entry key="Python" value="4558" />
         </counts>
       </usages-collector>
     </session>
@@ -91,8 +90,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/paddle/paragraph_extraction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="691">
-              <caret line="230" column="41" lean-forward="true" selection-start-line="230" selection-start-column="41" selection-end-line="230" selection-end-column="41" />
+            <state relative-caret-position="615">
+              <caret line="227" column="18" selection-start-line="227" selection-start-column="18" selection-end-line="227" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -192,8 +191,8 @@
         <option value="$PROJECT_DIR$/paddle/vocab.py" />
         <option value="$PROJECT_DIR$/paddle/dataset.py" />
         <option value="$PROJECT_DIR$/paddle/preprocess.py" />
-        <option value="$PROJECT_DIR$/paddle/paragraph_extraction.py" />
         <option value="$PROJECT_DIR$/paddle/Arch.txt" />
+        <option value="$PROJECT_DIR$/paddle/paragraph_extraction.py" />
       </list>
     </option>
   </component>
@@ -575,8 +574,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/paddle/paragraph_extraction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="691">
-          <caret line="230" column="41" lean-forward="true" selection-start-line="230" selection-start-column="41" selection-end-line="230" selection-end-column="41" />
+        <state relative-caret-position="615">
+          <caret line="227" column="18" selection-start-line="227" selection-start-column="18" selection-end-line="227" selection-end-column="18" />
         </state>
       </provider>
     </entry>

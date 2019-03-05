@@ -5,11 +5,13 @@ sh run.sh --para_extraction
 ```
 
 select paragraph
-- For each paragraph, compute the f1 score compared with the question
-- predefined maximum length of paragraph (MAX_P_LEN=500)
-- predefined splitter (splitter = u'<splitter>')
-- topN of related paragraph to choose (topN = 3)
-- For each document, to remove the duplicated paragraphs of documents
+- For each paragraph, compute the f1 score compared with the question.
+- predefined maximum length of paragraph (MAX_P_LEN=500).
+   - If the document length less than 500, set the whole document scores=1.0.
+   - otherwise, select topN paragraph (topN = 3).
+- predefined splitter (splitter = u'<splitter>').
+- For each document, to remove the duplicated paragraphs of documents.
+- In training, if current ducoment is answer, select the most related paragraph in this document, i.e., select most related paragraph to train.
 
 
 2.Vocabulary Preparation

@@ -62,6 +62,7 @@ def dup_remove(doc):
     # delete
     prev_del_num = 0
     del_num = 0
+    # should judge "del_ids" and "para_id" have values
     if del_ids and para_id:
         for p_idx in del_ids:
             if p_idx < para_id:
@@ -117,6 +118,10 @@ def paragraph_selection(sample, mode):
         para_id = None
         if doc_id is not None:
             para_id = sample['documents'][doc_id]['most_related_para']
+        """
+        doc['paragraphs_length'] is each paragraph length in document.
+        In order to calculate whether the total length larger than threshold "MAX_P_LEN". 
+        """
         total_len = title_len + sum(doc['paragraphs_length'])
         # add splitter
         para_num = len(doc["segmented_paragraphs"])  # the nums of all paragraphs in document
@@ -128,17 +133,32 @@ def paragraph_selection(sample, mode):
             incre_len = title_len
             total_segmented_content = copy.deepcopy(segmented_title)
             for p_idx, segmented_para in enumerate(doc["segmented_paragraphs"]):
-                if doc_id == d_idx and para_id > p_idx:
+                """
+                doc_id: answer document ID
+                para_id: most related paragraph ID in this documents
+                
+                The following operation is to calculate previous total length of title and paragraph,
+                in order to find the position of answer. 
+                """
+                if doc_id == d_idx and para_id > p_idx:  # para_id in behind
                     incre_len += len([splitter] + segmented_para)
                 if doc_id == d_idx and para_id == p_idx:
                     incre_len += 1
+                """
+                total_segmented_content = segmented_title + [splitter] + segmented_para
+                """
                 total_segmented_content += [splitter] + segmented_para
-            if doc_id == d_idx:
+            if doc_id == d_idx:  # i.e., current document is the answer document
                 answer_start = incre_len + sample['answer_spans'][0][0]
                 answer_end = incre_len + sample['answer_spans'][0][1]
                 sample['answer_spans'][0][0] = answer_start
                 sample['answer_spans'][0][1] = answer_end
-            doc["segmented_paragraphs"] = [total_segmented_content]
+            doc["segmented_paragraphs"] = [total_segmented_content]  # the whole document segmented with '<splitter>'
+            """
+            If the document's "total_len" <= "MAX_P_LEN", we select the whole document.
+            
+            (why set to 1.0)??? beacuse we select the whole document, the whole score is certain 1.0
+            """
             doc["segmented_paragraphs_scores"] = [1.0]
             doc['paragraphs_length'] = [total_len]
             doc['paragraphs'] = [''.join(total_segmented_content)]
@@ -150,12 +170,20 @@ def paragraph_selection(sample, mode):
                 enumerate(zip(doc['segmented_paragraphs'], doc['segmented_paragraphs_scores'])):
             para_infos.append((para_tokens, para_scores, len(para_tokens), p_idx))
         para_infos.sort(key=lambda x: (-x[1], x[2]))
+
+        # select top N paragraph.
         topN_idx = []
         for para_info in para_infos[:topN]:
             topN_idx.append(para_info[-1])
+
+        """
+        doc_id: answer document ID
+        para_id: most related paragraph ID in this documents
+        d_idx: current document
+        """
         final_idx = []
         total_len = title_len
-        if doc_id == d_idx:
+        if doc_id == d_idx:  # i.e., current document is the answer document
             if mode == "train":
                 final_idx.append(para_id)
                 total_len = title_len + 1 + doc['paragraphs_length'][para_id]

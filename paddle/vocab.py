@@ -158,7 +158,8 @@ class Vocab(object):
         with open(embedding_path, 'r') as fin:
             for line in fin:
                 contents = line.strip().split()
-                token = contents[0].decode('utf8')
+                # token = contents[0].decode('utf8')  # for python2
+                token = contents[0]  # for python3, 'str' has no decode()
                 if token not in self.token2id:
                     continue
                 """

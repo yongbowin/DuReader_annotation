@@ -163,7 +163,10 @@ def paragraph_selection(sample, mode):
             doc['paragraphs_length'] = [total_len]
             doc['paragraphs'] = [''.join(total_segmented_content)]
             doc['most_related_para'] = 0
-            continue
+
+            continue  # break this foreach, start next question
+
+        # ============= otherwise =============
         # find topN paragraph id
         para_infos = []
         for p_idx, (para_tokens, para_scores) in \

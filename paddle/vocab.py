@@ -19,6 +19,7 @@ This module implements the Vocab class for converting string to id and back
 """
 
 import numpy as np
+from gensim.models import KeyedVectors
 
 
 class Vocab(object):

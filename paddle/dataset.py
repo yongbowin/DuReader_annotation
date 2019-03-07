@@ -72,7 +72,7 @@ class BRCDataset(object):
             data_set = []
             for lidx, line in enumerate(fin):
                 """
-                a sample --> a question
+                a sample --> a question / documents
                 """
                 sample = json.loads(line.strip())
                 if train:
@@ -169,7 +169,42 @@ class BRCDataset(object):
                         sample['passages'].append({
                             'passage_tokens': fake_passage_tokens
                         })
+                """
+                sample = {
+                    "question_tokens": [xx,xx,xx, ...],
+                    "passages": [
+                            {"passage_tokens": most related paragraph in this document1.},
+                            {"passage_tokens": most related paragraph in this document2.},
+                            ......
+                        ]
+                    }
+                """
                 data_set.append(sample)
+            """
+            a sample --> a question
+            
+            data_set = [
+                sample1 = {
+                    "answer_passages": [x]
+                    "question_tokens": [xx,xx,xx, ...],
+                    "passages": [
+                            {"passage_tokens": most related paragraph in this document1.},
+                            {"passage_tokens": most related paragraph in this document2.},
+                            ......
+                        ]
+                    }
+                sample2 = {
+                    "answer_passages": [x]
+                    "question_tokens": [xx,xx,xx, ...],
+                    "passages": [
+                            {"passage_tokens": most related paragraph in this document1.},
+                            {"passage_tokens": most related paragraph in this document2.},
+                            ......
+                        ]
+                    }
+                    ......
+                ]
+            """
         return data_set
 
     def _one_mini_batch(self, data, indices, pad_id):

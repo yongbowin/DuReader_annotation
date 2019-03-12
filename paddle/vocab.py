@@ -148,6 +148,22 @@ class Vocab(object):
         for token in [self.pad_token, self.unk_token, self.split_token]:
             self.embeddings[self.get_id(token)] = np.zeros([self.embed_dim])
 
+    def get_vector(self, embed_dim):
+        """
+        Usage: refer to https://www.itread01.com/content/1542049469.html
+        """
+        w2v_path = "/data/wangyongbo/lic2019/w2v/Tencent_AILab_ChineseEmbedding/Tencent_AILab_ChineseEmbedding.txt"
+        wv_from_text = KeyedVectors.load_word2vec_format(w2v_path, binary=False)
+        # word_size = wv_from_text.wv.syn0[0].shape[0]
+
+        self.embed_dim = embed_dim
+        self.embeddings = np.random.rand(self.size(), embed_dim)  # the scope is [0, 1)
+        for token in [self.pad_token, self.unk_token, self.split_token]:
+            if token in wv_from_text.wv.vocab.keys():
+                self.embeddings[self.get_id(token)] = wv_from_text[token]
+            else:
+                self.embeddings[self.get_id(token)] = np.zeros([self.embed_dim])
+
     def load_pretrained_embeddings(self, embedding_path):
         """
         loads the pretrained embeddings from embedding_path,

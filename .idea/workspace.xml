@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f46de4b3-d199-4ea0-9739-0d29b1902c73" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paddle/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/paddle/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paddle/vocab.py" beforeDir="false" afterPath="$PROJECT_DIR$/paddle/vocab.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rockburst/rockburst.py" beforeDir="false" afterPath="$PROJECT_DIR$/rockburst/common.py" afterDir="false" />
-    </list>
+    <list default="true" id="f46de4b3-d199-4ea0-9739-0d29b1902c73" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,8 +119,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/paddle/extract_yesno.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+            <state relative-caret-position="234">
+              <caret line="60" column="26" lean-forward="true" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -861,8 +856,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/paddle/extract_yesno.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+        <state relative-caret-position="234">
+          <caret line="60" column="26" lean-forward="true" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

@@ -33,7 +33,7 @@ for id,pred in zip(ids_list, pred_list):
     new_dict[int(id)] = pred
 
 
-with open(BASE_PATH + "test_result_rm.json", "r", encoding="utf-8") as f1:
+with open(BASE_PATH + "test_result_rm_mixed.json", "r", encoding="utf-8") as f1:
     res_rm = f1.readlines()
 
 # ---------------------------

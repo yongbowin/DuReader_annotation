@@ -116,8 +116,7 @@ class BRCDataset(object):
                         """
                         most_related_para = doc['most_related_para']
                         sample['passages'].append({
-                            'passage_tokens':
-                            doc['segmented_paragraphs'][most_related_para],
+                            'passage_tokens': doc['segmented_paragraphs'][most_related_para],
                             'is_selected': doc['is_selected']
                         })
                     else:

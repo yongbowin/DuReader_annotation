@@ -93,7 +93,7 @@ def paragraph_selection(sample, mode):
     Raises:
         None
     """
-    # predefined maximum length of paragraph
+    # predefined maximum length of (each) paragraph.
     MAX_P_LEN = 500
     # predefined splitter
     splitter = u'<splitter>'
@@ -124,7 +124,7 @@ def paragraph_selection(sample, mode):
         """
         total_len = title_len + sum(doc['paragraphs_length'])
         # add splitter
-        para_num = len(doc["segmented_paragraphs"])  # the nums of all paragraphs in document
+        para_num = len(doc["segmented_paragraphs"])  # the nums of all paragraphs in document = the nums of "splitter"
         total_len += para_num
         """
         total_len = len(segmented_title) + sum(doc['paragraphs_length']) + len(doc["segmented_paragraphs"])
@@ -179,7 +179,7 @@ def paragraph_selection(sample, mode):
         for para_info in para_infos[:topN]:
             topN_idx.append(para_info[-1])
 
-        """
+        """extract_yesno_from_results.py
         doc_id: answer document ID
         para_id: most related paragraph ID in this documents
         d_idx: current document

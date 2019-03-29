@@ -40,6 +40,13 @@ def bi_lstm_encoder(input_seq, gate_size, para_name, args):
     and cell activation vectors need be done outside of dynamic_lstm.
     So the output size is 4 times of gate_size.
     """
+    """
+    bi_lstm_encoder(
+        input_seq=input_embedding,
+        gate_size=hidden_size,
+        para_name=para_name,
+        args=args)
+    """
 
     input_forward_proj = layers.fc(
         input=input_seq,
@@ -88,7 +95,7 @@ def embedding(input_ids, shape, args):
     return input_embedding
 
 
-def encoder(input_embedding, para_name, hidden_size, args):
+def encoder(input_embedding, para_name, hidden_size, args):  # (p_emb, 'p_enc', hidden_size, args)
     """Encoding layer"""
     encoder_out = bi_lstm_encoder(
         input_seq=input_embedding,
@@ -288,20 +295,29 @@ def rc_model(hidden_size, vocab, args):
         return input_ids
     """
     q_id0 = get_data('q_id0', 1, args)
-
     q_ids = get_data('q_ids', 2, args)
     p_ids_name = 'p_ids'
-
     p_ids = get_data('p_ids', 2, args)
+
+    """
+    def embedding(input_ids, shape, args):  # Embedding layer
+        input_embedding = layers.embedding(
+            input=input_ids,
+            size=shape,
+            dtype='float32',
+            is_sparse=True,
+            param_attr=fluid.ParamAttr(name='embedding_para'))
+        return input_embedding
+    """
     p_embs = embedding(p_ids, emb_shape, args)  # emb_shape = [vocab.size(), vocab.embed_dim]
     q_embs = embedding(q_ids, emb_shape, args)
     drnn = layers.DynamicRNN()
     with drnn.block():
-        p_emb = drnn.step_input(p_embs)
+        p_emb = drnn.step_input(p_embs)  # step_input()将序列标记为动态RNN输入
         q_emb = drnn.step_input(q_embs)
 
-        p_enc = encoder(p_emb, 'p_enc', hidden_size, args)
-        q_enc = encoder(q_emb, 'q_enc', hidden_size, args)
+        p_enc = encoder(p_emb, 'p_enc', hidden_size, args)  # BiLSTM
+        q_enc = encoder(q_emb, 'q_enc', hidden_size, args)  # BiLSTM
 
         # stage 2:match
         g_i = attn_flow(q_enc, p_enc, p_ids_name, args)

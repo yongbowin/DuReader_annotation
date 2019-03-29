@@ -9,6 +9,11 @@ OUTPUT_PATH = '/home/wangyongbo/2019rc/DuReader_test/data/yesno/'
 def all_ques_ids():
     """
     acquire all questions ids.
+
+    Extract answers from `test_result_rm.json`(cleaned results)
+
+    Return: (all yes_no type ...)
+        {11253: "This is a answer of question xxx.", 8907: "This is the answer of question xxxx", ......}
     """
     with open(BASE_PATH + "results/" + "test_result_rm.json", "r", encoding="utf-8") as f:
         res = f.readlines()  # list, len=120000
@@ -56,14 +61,19 @@ for source in sources:
     for item in items:
         line = json.loads(item)
         if line["question_id"] in ques_ids_list:
-            new_line = []
+            new_line = []  # question,answer,ids
             new_line.append(line["question"])
-            new_line.append(ques_ids_list[line["question_id"]])
+            new_line.append(ques_ids_list[line["question_id"]])  # answers from test_result_rm.json
             new_line.append(line["question_id"])
             yes_no_rows.append(new_line)
 
-    # write csv file
-    output_file = OUTPUT_PATH + source + ".test.yesno.csv"
+    """
+    1.Write to `zhidao.test.yesno_op.csv` and `search.test.yesno_op.csv`. These two files are used as input of Bert classifier.
+    
+    2.In order to predict `Yes` or `No` or `Depends` by using Bert classifier, 
+    then write to `predict_results_zhidao.txt` and `predict_results_search.txt`.
+    """
+    output_file = OUTPUT_PATH + source + ".test.yesno_op.csv"
     with open(output_file, 'w') as fout:
         f_csv = csv.writer(fout)
         f_csv.writerows(yes_no_rows)

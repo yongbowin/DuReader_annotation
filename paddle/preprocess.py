@@ -108,7 +108,7 @@ def metric_max_over_ground_truths(metric_fn, prediction, ground_truths):
     """
     scores_for_ground_truths = []
     for ground_truth in ground_truths:  # i.e., for a single question token in question_tokens_list
-        # for each token in question tokens list, to calculate f1 with para_kokens (para list)
+        # for each token in question tokens list, to calculate f1 with para_tokens (para list)
         score = metric_fn(prediction, ground_truth)  # f1_score()
         scores_for_ground_truths.append(score)
     return max(scores_for_ground_truths)

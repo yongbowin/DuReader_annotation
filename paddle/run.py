@@ -349,9 +349,9 @@ def train(logger, args):
     max_q_len=60
     """
     brc_data = BRCDataset(args.max_p_num, args.max_p_len, args.max_q_len,
-                          args.trainset, args.devset)
+                          args.trainset, args.devset)  # prepare every doc's most related para
     logger.info('Converting text into ids...')
-    brc_data.convert_to_ids(vocab)  # convert vocab tokens to ids
+    brc_data.convert_to_ids(vocab)  # convert sample['question_tokens'] and sample['passages'] tokens to ids
     logger.info('Initialize the model...')
 
     if not args.use_gpu:
@@ -411,12 +411,15 @@ def train(logger, args):
                 exe.run(startup_prog)
                 embedding_para = fluid.global_scope().find_var(
                     'embedding_para').get_tensor()
+                """
+                self.embedding have all vocab tokens embedding.
+                """
                 embedding_para.set(vocab.embeddings.astype(np.float32), place)
 
             # prepare data
             feed_list = [
                 main_program.global_block().var(var_name)
-                for var_name in feed_order
+                for var_name in feed_order  # feed_order=["q_ids", "start_lables", "end_lables", "p_ids", "q_id0"]
             ]
             feeder = fluid.DataFeeder(feed_list, place)
 

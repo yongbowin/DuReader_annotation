@@ -10,6 +10,7 @@
 import numpy as np
 import pdb
 
+
 def my_lcs(string, sub):
     """
     Calculates longest common subsequence for a pair of tokenized strings
@@ -32,6 +33,7 @@ def my_lcs(string, sub):
                 lengths[i][j] = max(lengths[i-1][j] , lengths[i][j-1])
 
     return lengths[len(string)][len(sub)]
+
 
 class Rouge():
     '''
@@ -56,7 +58,7 @@ class Rouge():
 
         # split into tokens
         token_c = candidate[0].split(" ")
-    	
+
         for reference in refs:
             # split into tokens
             token_r = reference.split(" ")
@@ -68,7 +70,7 @@ class Rouge():
         prec_max = max(prec)
         rec_max = max(rec)
 
-        if(prec_max!=0 and rec_max !=0):
+        if (prec_max!=0 and rec_max!=0):
             score = ((1 + self.beta**2)*prec_max*rec_max)/float(rec_max + self.beta**2*prec_max)
         else:
             score = 0.0
@@ -88,7 +90,7 @@ class Rouge():
         score = []
         for id in imgIds:
             hypo = res[id]
-            ref  = gts[id]
+            ref = gts[id]
 
             score.append(self.calc_score(hypo, ref))
 
@@ -103,3 +105,5 @@ class Rouge():
 
     def method(self):
         return "Rouge"
+
+

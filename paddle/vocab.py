@@ -158,11 +158,12 @@ class Vocab(object):
 
         self.embed_dim = embed_dim
         self.embeddings = np.random.rand(self.size(), embed_dim)  # the scope is [0, 1)
-        for token in [self.pad_token, self.unk_token, self.split_token]:
+        for token in self.token2id:
             if token in wv_from_text.wv.vocab.keys():
                 self.embeddings[self.get_id(token)] = wv_from_text[token]
-            else:
-                self.embeddings[self.get_id(token)] = np.zeros([self.embed_dim])
+
+        for token in [self.pad_token, self.unk_token, self.split_token]:
+            self.embeddings[self.get_id(token)] = np.zeros([self.embed_dim])
 
     def load_pretrained_embeddings(self, embedding_path):
         """

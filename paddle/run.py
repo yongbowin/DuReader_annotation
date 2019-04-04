@@ -175,6 +175,16 @@ def find_best_answer_for_passage(start_probs, end_probs, passage_len):
 def find_best_answer_for_inst(sample, start_prob, end_prob, inst_lod,
                               para_prior_scores=(0.44, 0.23, 0.15, 0.09, 0.07)):
     """
+    zhidao.train.json, {0: 54859, 1: 29541, 2: 20401, 3: 13820, 4: 11122}
+                rate, {0.4228, 0.2277, 0.1572, 0.1065, 0.0857}
+    search.train.json, {0: 60082, 1: 30699, 2: 19829, 3: 11240, 4: 6882}
+                rate, {0.4667, 0.2385, 0.1540, 0.0873, 0.0535}
+
+    Total distri (zhidao and search):
+        rate, {0.4447, 0.2331, 0.1556, 0.0970, 0.0697}
+    """
+
+    """
     Finds the best answer for a sample given start_prob and end_prob for each position.
     This will call find_best_answer_for_passage because there are multiple passages in a sample
     """
@@ -231,7 +241,7 @@ def validation(inference_program, avg_cost, s_probs, e_probs, match, feed_order,
     ]
     val_feeder = fluid.DataFeeder(val_feed_list, place)
     pad_id = vocab.get_id(vocab.pad_token)
-    dev_reader = lambda:brc_data.gen_mini_batches('dev', args.batch_size, pad_id, shuffle=False)
+    dev_reader = lambda: brc_data.gen_mini_batches('dev', args.batch_size, pad_id, shuffle=False)
     dev_reader = read_multiple(dev_reader, dev_count)
 
     for batch_id, batch_list in enumerate(dev_reader(), 1):

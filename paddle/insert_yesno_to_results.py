@@ -11,7 +11,7 @@ ids_list = []
 pred_list = []
 for source in ["zhidao", "search"]:
     cou = 0
-    with open(BASE_PATH + source + ".test.yesno_op.csv", "r", encoding="utf-8") as f2:
+    with open(BASE_PATH + source + ".test1.yesno_op.csv", "r", encoding="utf-8") as f2:
         reader = csv.reader(f2, delimiter=",")
         for line in reader:
             if cou != 0:
@@ -33,7 +33,7 @@ for id,pred in zip(ids_list, pred_list):
     new_dict[int(id)] = pred
 
 
-with open(BASE_PATH + "test_result_rm_mixed.json", "r", encoding="utf-8") as f1:
+with open(BASE_PATH + "test_result_baseline_ep4_rm.json", "r", encoding="utf-8") as f1:
     res_rm = f1.readlines()
 
 # ---------------------------
@@ -66,6 +66,6 @@ for i in res_rm:
     json_list.append(item_dict)
 
 # ================ write to file ================
-with open(BASE_PATH + "test_result_rm_yesno.json", 'w') as fout:
+with open(BASE_PATH + "test_result_bs_ep4_rm_yesno.json", 'w') as fout:
     for pred_answer in json_list:
         fout.write(json.dumps(pred_answer, ensure_ascii=False) + '\n')

@@ -1,20 +1,36 @@
 import re
 import json
 
-BASE_PATH = "/home/wyb/Downloads/"
+
+# BASE_PATH = "/home/wangyongbo/2019rc/DuReader_test_submit/data/results/"
+BASE_PATH = ""
 
 
-with open(BASE_PATH + "test_result.json", "r", encoding="utf-8") as f:
+with open(BASE_PATH + "test_result_merge_best.json", "r", encoding="utf-8") as f:
     res = f.readlines()  # list, len=120000
 
 # text = "This is a \n file \r that \r hello\r!"
 
 
 def clean_sepc_char(text):
-    replace_p = ["\t", "\n", "\r", "\u3000", "<splitter>", "/>"]
+    replace_p = ["\t", "\n", "\r", "\u3000", "<splitter>", "/>", "\\x0a", "<br", "\\x09"]
     for i in replace_p:
         if i in text:
             text = text.replace(i, "")
+
+    text = text.strip()
+
+    return text
+
+
+def remove_first_pun(text):
+    C_pun = u'，。！？】）》：'
+    if text and text[0] in C_pun:  # if the first elem is chinese pun, remove it.
+        text = text[1:]
+
+    text = text.replace("=》", "=>").replace("-》", "->")
+
+    text = text.strip()
 
     return text
 
@@ -30,18 +46,13 @@ def E_trans_to_C(string):
     return string.translate(table)
 
 
-# s1 = '这里包含英文字符.'
-# s2 = E_trans_to_C(s1)
-# print(s2)
-
-
 # for i in res:
 #     data = json.loads(i)
 #     if "&amp" in data["answers"][0]:
 #         print(data)
 
 
-# # cate_type = set()  # {'DESCRIPTION', 'YES_NO', 'ENTITY'}
+# cate_type = set()  # {'DESCRIPTION', 'YES_NO', 'ENTITY'}
 # for i in res:
 #     data = json.loads(i)
 #     if data["question_type"] == "YES_NO":
@@ -73,9 +84,10 @@ for i in res:
 
     data = json.loads(i)
     text = data["answers"][0]
-    text = clean_sepc_char(text)
     text = remove_html(text)
-    text = E_trans_to_C(text)
+    text = clean_sepc_char(text)
+    # text = E_trans_to_C(text)
+    text = remove_first_pun(text)
 
     item_dict["question_id"] = data["question_id"]
     item_dict["question_type"] = data["question_type"]
@@ -86,9 +98,6 @@ for i in res:
     json_list.append(item_dict)
 
 # ================ write to file ================
-# with open(BASE_PATH + "test_result_rm.json", 'w') as fout:
-#     for pred_answer in json_list:
-#         fout.write(json.dumps(pred_answer, ensure_ascii=False) + '\n')
-
-
-
+with open(BASE_PATH + "test_result_merge_best_1.json", 'w') as fout:
+    for pred_answer in json_list:
+        fout.write(json.dumps(pred_answer, ensure_ascii=False) + '\n')

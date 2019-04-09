@@ -46,6 +46,15 @@ def dup_remove(doc):
     paragraphs_his = {}
     del_ids = []
     para_id = None
+
+    # Others modified in Github.
+    # # ----------------- modify start -----------------
+    # if 'most_related_para' in doc:  # for trainset and devset
+    #     para_id = doc['most_related_para']
+    # else:  # for testset
+    #     para_id = find_best_question_match(doc, question)
+    # # ----------------- modify end -----------------
+
     if 'most_related_para' in doc:
         para_id = doc['most_related_para']
     doc['paragraphs_length'] = []

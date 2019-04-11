@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f46de4b3-d199-4ea0-9739-0d29b1902c73" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paddle/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/paddle/dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_bleu_rouge.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_bleu_rouge.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/bleu_metric/bleu.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/bleu_metric/bleu.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/rouge_metric/rouge.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/rouge_metric/rouge.py" afterDir="false" />
     </list>
@@ -92,7 +91,7 @@
           <entry key="dummy" value="32" />
           <entry key="gitignore" value="1" />
           <entry key="json" value="41" />
-          <entry key="py" value="19263" />
+          <entry key="py" value="19809" />
           <entry key="sh" value="141" />
           <entry key="ttt111" value="6" />
           <entry key="txt" value="1119" />
@@ -103,7 +102,7 @@
           <entry key="Bash" value="141" />
           <entry key="JSON" value="41" />
           <entry key="PLAIN_TEXT" value="1258" />
-          <entry key="Python" value="19263" />
+          <entry key="Python" value="19809" />
         </counts>
       </usages-collector>
     </session>
@@ -113,8 +112,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/rouge_metric/rouge.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="59" column="27" lean-forward="true" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
+            <state relative-caret-position="1843">
+              <caret line="97" selection-start-line="97" selection-end-line="97" />
               <folding>
                 <element signature="e#214#232#0" expanded="true" />
               </folding>
@@ -125,8 +124,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/dureader_eval.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="134" column="39" selection-start-line="134" selection-start-column="39" selection-end-line="134" selection-end-column="39" />
+            <state relative-caret-position="290">
+              <caret line="124" column="4" selection-start-line="124" selection-start-column="4" selection-end-line="124" selection-end-column="4" />
               <folding>
                 <element signature="e#854#869#0" expanded="true" />
               </folding>
@@ -137,8 +136,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/bleu_metric/bleu.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+            <state relative-caret-position="357">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
               <folding>
                 <element signature="e#245#280#0" expanded="true" />
               </folding>
@@ -170,10 +169,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run_bleu_rouge.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="53" column="30" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
+            <state relative-caret-position="737">
+              <caret line="119" column="41" selection-start-line="119" selection-start-column="41" selection-end-line="119" selection-end-column="41" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
+                <marker date="1554973216792" expanded="true" signature="822:2969" ph="..." />
               </folding>
             </state>
           </provider>
@@ -258,7 +258,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/paddle/Arch.txt" />
         <option value="$PROJECT_DIR$/paddle/args.py" />
         <option value="$PROJECT_DIR$/paddle/classification_yesno.py" />
         <option value="$PROJECT_DIR$/rockburst/run_knn.py" />
@@ -307,8 +306,9 @@
         <option value="$PROJECT_DIR$/paddle/dataset.py" />
         <option value="$PROJECT_DIR$/utils/test.json" />
         <option value="$PROJECT_DIR$/utils/run_bleu_rouge.py" />
-        <option value="$PROJECT_DIR$/utils/bleu_metric/bleu.py" />
         <option value="$PROJECT_DIR$/utils/rouge_metric/rouge.py" />
+        <option value="$PROJECT_DIR$/utils/bleu_metric/bleu.py" />
+        <option value="$PROJECT_DIR$/run_bleu_rouge.py" />
       </list>
     </option>
   </component>
@@ -891,26 +891,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/bleu_metric/bleu.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
-          <folding>
-            <element signature="e#245#280#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/dureader_eval.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="134" column="39" selection-start-line="134" selection-start-column="39" selection-end-line="134" selection-end-column="39" />
-          <folding>
-            <element signature="e#854#869#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -918,22 +898,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utils/dureader_eval.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="124" column="4" selection-start-line="124" selection-start-column="4" selection-end-line="124" selection-end-column="4" />
+          <folding>
+            <element signature="e#854#869#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils/rouge_metric/rouge.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="59" column="27" lean-forward="true" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
+        <state relative-caret-position="1843">
+          <caret line="97" selection-start-line="97" selection-end-line="97" />
           <folding>
             <element signature="e#214#232#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utils/bleu_metric/bleu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+          <folding>
+            <element signature="e#245#280#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/run_bleu_rouge.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="53" column="30" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
+        <state relative-caret-position="737">
+          <caret line="119" column="41" selection-start-line="119" selection-start-column="41" selection-end-line="119" selection-end-column="41" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
+            <marker date="1554973216792" expanded="true" signature="822:2969" ph="..." />
           </folding>
         </state>
       </provider>

@@ -338,6 +338,12 @@ class BRCDataset(object):
             raise NotImplementedError('No data set named as {}'.format(
                 set_name))
         data_size = len(data)
+        """
+        Example:
+            >>> import numpy as np
+            >>> np.arange(3)
+            array([0, 1, 2])
+        """
         indices = np.arange(data_size)
         if shuffle:
             np.random.shuffle(indices)

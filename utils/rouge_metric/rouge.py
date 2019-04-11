@@ -9,6 +9,7 @@
 
 import numpy as np
 import pdb
+from tqdm import tqdm
 
 
 def my_lcs(string, sub):
@@ -88,7 +89,7 @@ class Rouge():
         imgIds = gts.keys()
 
         score = []
-        for id in imgIds:
+        for id in tqdm(imgIds):
             hypo = res[id]
             ref = gts[id]
 

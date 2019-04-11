@@ -217,7 +217,7 @@ class BRCDataset(object):
             one batch of data
         """
         batch_data = {
-            'raw_data': [data[i] for i in indices],
+            'raw_data': [data[i] for i in indices],  # `indices` is all index of the whole batch.
             'question_token_ids': [],
             'question_length': [],
             'passage_token_ids': [],
@@ -226,6 +226,9 @@ class BRCDataset(object):
             'end_id': [],
             'passage_num': []
         }
+        """
+        Each `sample['passages']` has 5 docs, each doc has 500 tokens.
+        """
         max_passage_num = max(
             [len(sample['passages']) for sample in batch_data['raw_data']])
         max_passage_num = min(self.max_p_num, max_passage_num)
@@ -345,8 +348,10 @@ class BRCDataset(object):
             array([0, 1, 2])
         """
         indices = np.arange(data_size)
-        if shuffle:
+        if shuffle:  # Do shuffle!
             np.random.shuffle(indices)
         for batch_start in np.arange(0, data_size, batch_size):
+            """`batch_indices` is all index of the whole batch.
+            """
             batch_indices = indices[batch_start:batch_start + batch_size]
             yield self._one_mini_batch(data, batch_indices, pad_id)

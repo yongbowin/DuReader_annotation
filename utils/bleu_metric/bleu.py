@@ -9,6 +9,7 @@
 # Authors : Hao Fang <hfang@uw.edu> and Tsung-Yi Lin <tl483@cornell.edu>
 
 from .bleu_scorer import BleuScorer
+from tqdm import tqdm
 
 
 class Bleu:
@@ -24,7 +25,7 @@ class Bleu:
         imgIds = list(gts.keys())
 
         bleu_scorer = BleuScorer(n=self._n)
-        for id in imgIds:
+        for id in tqdm(imgIds):
             hypo = res[id]
             ref = gts[id]
 

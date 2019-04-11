@@ -26,7 +26,7 @@ def prepare_data():
         2.eval `search` and `zhidao`, respectively.
     """
     # -------------------------- for pred answers (start) --------------------------
-    with open(BASE_PATH_PRED + "results_dev/test_result_merge_best_rm_dev.json", "r") as f1:
+    with open(BASE_PATH_PRED + "results_dev/test_result_merge_best_rm.json", "r") as f1:
         pred_lines = f1.readlines()
 
     with open(BASE_PATH_PRED + "results_dev/test_result_search_best.json", "r") as f1_1:

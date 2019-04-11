@@ -216,11 +216,16 @@ class BRCDataset(object):
         Returns:
             one batch of data
         """
+        """
+        corresponding:
+            'question_token_ids': [question, question, question, ..., question]
+            'passage_token_ids': [doc1, doc2, doc3, ..., doc n]
+        """
         batch_data = {
             'raw_data': [data[i] for i in indices],  # `indices` is all index of the whole batch.
-            'question_token_ids': [],
+            'question_token_ids': [],  # length=batch_size*max_passage_num, copy `question` [length] times.
             'question_length': [],
-            'passage_token_ids': [],
+            'passage_token_ids': [],  # corresponding to `question_token_ids`
             'passage_length': [],
             'start_id': [],
             'end_id': [],
@@ -257,6 +262,9 @@ class BRCDataset(object):
                         passade_idx_offset + i])
                 start_id = min(sample['answer_spans'][0][0], self.max_p_len)
                 end_id = min(sample['answer_spans'][0][1], self.max_p_len)
+                """
+                concat all 5 docs to train.
+                """
                 batch_data['start_id'].append(gold_passage_offset + start_id)
                 batch_data['end_id'].append(gold_passage_offset + end_id)
             else:

@@ -107,7 +107,8 @@ def paragraph_selection(sample, mode):
     # predefined splitter
     splitter = u'<splitter>'
     # topN of related paragraph to choose
-    topN = 3
+    # topN = 3
+    topN = 1000000
     doc_id = None
     if 'answer_docs' in sample and len(sample['answer_docs']) > 0:
         doc_id = sample['answer_docs'][0]
@@ -181,31 +182,38 @@ def paragraph_selection(sample, mode):
         for p_idx, (para_tokens, para_scores) in \
                 enumerate(zip(doc['segmented_paragraphs'], doc['segmented_paragraphs_scores'])):
             para_infos.append((para_tokens, para_scores, len(para_tokens), p_idx))
-        para_infos.sort(key=lambda x: (-x[1], x[2]))
+        para_infos.sort(key=lambda x: (-x[1], x[2]))  # sort by `para_scores` (question vs para)
 
         # select top N paragraph.
         topN_idx = []
         for para_info in para_infos[:topN]:
             topN_idx.append(para_info[-1])
 
-        """extract_yesno_from_results.py
+        """
         doc_id: answer document ID
         para_id: most related paragraph ID in this documents
         d_idx: current document
+        """
+        # -------------------------- start --------------------------
+        """
+        The following codes is to add `para id` from `topN_idx` to `final_idx`, 
+        we know that `testset` has no `doc_id` (None), so should ensure the `final_idx` has the most related para id when `train`.
         """
         final_idx = []
         total_len = title_len
         if doc_id == d_idx:  # i.e., current document is the answer document
             if mode == "train":
-                final_idx.append(para_id)
+                final_idx.append(para_id)  # para_id: most related paragraph ID in this documents
                 total_len = title_len + 1 + doc['paragraphs_length'][para_id]
         for id in topN_idx:
-            if total_len > MAX_P_LEN:
+            if total_len > MAX_P_LEN:  # so `topN` could set to 1000000
                 break
-            if doc_id == d_idx and id == para_id and mode == "train":
-                continue
-            total_len += 1 + doc['paragraphs_length'][id] 
+            # doc_id: answer document ID, d_idx: current document
+            if doc_id == d_idx and id == para_id and mode == "train":  # for `trainset`
+                continue  # because line 198-201 has added this para to `final_idx`.
+            total_len += 1 + doc['paragraphs_length'][id]
             final_idx.append(id)
+        # ---------------------------- end ---------------------------
         total_segmented_content = copy.deepcopy(segmented_title)
         final_idx.sort()
         incre_len = title_len

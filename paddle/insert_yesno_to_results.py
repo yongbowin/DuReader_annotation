@@ -67,5 +67,5 @@ for i in res_rm:
 
 # ================ write to file ================
 with open(BASE_PATH + "test_result_merge_best_rm_full_test_yesno.json", 'w') as fout:
-    for pred_answer in json_list:
+    for pred_answer in json_list:  # [{}, {}, ...]
         fout.write(json.dumps(pred_answer, ensure_ascii=False) + '\n')

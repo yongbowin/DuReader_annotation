@@ -4,3 +4,4 @@ paddle/find_best_ans.py
 paddle/merge_pipeline.py
 paddle/preprocess_find_fake_answer.py
 paddle/paragraph_extraction_for_test.py
+paddle/paragraph_extraction_new.py

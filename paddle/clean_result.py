@@ -13,7 +13,7 @@ with open(BASE_PATH + "test_result_merge_best.json", "r", encoding="utf-8") as f
 
 
 def clean_sepc_char(text):
-    replace_p = ["\t", "\n", "\r", "\u3000", "<splitter>", "/>", "\\x0a", "<br", "\\x09"]
+    replace_p = ["\t", "\n", "\r", "\u3000", "<splitter>", "/>", "\\x0a", "<br", "\\x09", "●"]
     for i in replace_p:
         if i in text:
             text = text.replace(i, "")

@@ -215,4 +215,5 @@ if __name__ == '__main__':
     for line in sys.stdin:
         sample = json.loads(line)
         find_fake_answer(sample)
-        print(json.dumps(sample, encoding='utf8', ensure_ascii=False))
+        # print(json.dumps(sample, encoding='utf8', ensure_ascii=False))
+        print(json.dumps(sample, ensure_ascii=False))  # for py3

@@ -5,3 +5,4 @@ paddle/merge_pipeline.py
 paddle/preprocess_find_fake_answer.py
 paddle/paragraph_extraction_for_test.py
 paddle/paragraph_extraction_new.py
+paddle/extract_ans_from_jingyan.py

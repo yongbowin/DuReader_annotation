@@ -3,6 +3,9 @@ from tqdm import tqdm
 
 """
 Split trainset to many subfiles, each file has 1000 samples.
+
+search: 137
+zhidao: 136
 """
 
 datasets = ["search", "zhidao"]

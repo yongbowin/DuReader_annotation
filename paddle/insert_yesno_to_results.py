@@ -33,7 +33,7 @@ for id,pred in zip(ids_list, pred_list):
     new_dict[int(id)] = pred
 
 
-with open(BASE_PATH + "test_result_merge_best_rm_full_test.json", "r", encoding="utf-8") as f1:
+with open(BASE_PATH + "test_result_merge_best_rm_new_split_add_logit.json", "r", encoding="utf-8") as f1:
     res_rm = f1.readlines()
 
 # ---------------------------
@@ -66,6 +66,6 @@ for i in res_rm:
     json_list.append(item_dict)
 
 # ================ write to file ================
-with open(BASE_PATH + "test_result_merge_best_rm_full_test_yesno.json", 'w') as fout:
+with open(BASE_PATH + "test_result_merge_best_rm_new_split_add_logit_yesno.json", 'w') as fout:
     for pred_answer in json_list:  # [{}, {}, ...]
         fout.write(json.dumps(pred_answer, ensure_ascii=False) + '\n')

@@ -6,3 +6,5 @@ paddle/preprocess_find_fake_answer.py
 paddle/paragraph_extraction_for_test.py
 paddle/paragraph_extraction_new.py
 paddle/extract_ans_from_jingyan.py
+paddle/analy_desc_question.py
+paddle/rank_by_question_title.py
